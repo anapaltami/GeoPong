@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.io.File;
 
 public class GamePanel extends JPanel implements Runnable {
     
@@ -33,8 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
     Image image;
     Graphics graphics;
     Random random;
-    Paddle paddle1;
-    Paddle paddle2;
+    RectPaddle rectPaddle1;
+    RectPaddle rectPaddle2;
     Ball ball;
     Score score;
 
@@ -66,8 +67,8 @@ public class GamePanel extends JPanel implements Runnable {
      * newPaddles method creates new paddles on the screen
      */
     public void newPaddles() {
-        paddle1 = new Paddle(0, (GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), PADDLE_WIDTH, PADDLE_HEIGHT, 1); //x and y coordinate, width and height, and id
-        paddle2 = new Paddle(GAME_WIDTH-PADDLE_WIDTH, (GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), PADDLE_WIDTH, PADDLE_HEIGHT, 2); //x and y coordinate, width and height, and id
+        rectPaddle1 = new RectPaddle(0, (GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), PADDLE_WIDTH, PADDLE_HEIGHT, 1); //x and y coordinate, width and height, and id
+        rectPaddle2 = new RectPaddle(GAME_WIDTH-PADDLE_WIDTH, (GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), PADDLE_WIDTH, PADDLE_HEIGHT, 2); //x and y coordinate, width and height, and id
     }
     
     /**
@@ -86,8 +87,8 @@ public class GamePanel extends JPanel implements Runnable {
      * @param g 
      */
     public void draw(Graphics g) {
-        paddle1.draw(g);
-        paddle2.draw(g);
+        rectPaddle1.drawRect(g);
+        rectPaddle2.drawRect(g);
         ball.draw(g);
         score.draw(g);
     }
@@ -95,9 +96,9 @@ public class GamePanel extends JPanel implements Runnable {
     /**
      * move method lets object move 
      */
-    public void move() { 
-        paddle1.move();
-        paddle2.move();
+    public void move() {
+        rectPaddle1.moveRect();
+        rectPaddle2.moveRect();
         ball.move();
     }
     
@@ -116,7 +117,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
         
         //bounces ball off paddles
-        if(ball.intersects(paddle1)){
+        if(ball.intersects(rectPaddle1)){
             ball.xSpeed = Math.abs(ball.xSpeed);
             ball.xSpeed++; //to increment the speed of the ball after hitting the paddle
             if(ball.ySpeed>0)
@@ -127,7 +128,7 @@ public class GamePanel extends JPanel implements Runnable {
             ball.setYDirection(ball.ySpeed);
         }
         
-        if(ball.intersects(paddle2)){
+        if(ball.intersects(rectPaddle2)){
             ball.xSpeed = Math.abs(ball.xSpeed);
             ball.xSpeed++; //to increment the speed of the ball after hitting the paddle
             if(ball.ySpeed>0)
@@ -139,27 +140,27 @@ public class GamePanel extends JPanel implements Runnable {
         }
         
         //stops paddle at window edges
-        if(paddle1.y <= 0)
-            paddle1.y=0;
-        if(paddle1.y>= (GAME_HEIGHT-PADDLE_HEIGHT))
-            paddle1.y = GAME_HEIGHT-PADDLE_HEIGHT;
+        if(rectPaddle1.y <= 0)
+            rectPaddle1.y=0;
+        if(rectPaddle1.y>= (GAME_HEIGHT-PADDLE_HEIGHT))
+            rectPaddle1.y = GAME_HEIGHT-PADDLE_HEIGHT;
         
-        if(paddle2.y <= 0)
-            paddle2.y=0;
-        if(paddle2.y>= (GAME_HEIGHT-PADDLE_HEIGHT))
-            paddle2.y = GAME_HEIGHT-PADDLE_HEIGHT;  
+        if(rectPaddle2.y <= 0)
+            rectPaddle2.y=0;
+        if(rectPaddle2.y>= (GAME_HEIGHT-PADDLE_HEIGHT))
+            rectPaddle2.y = GAME_HEIGHT-PADDLE_HEIGHT;
         
         //gives a player a point and creates new paddles and ball
         if(ball.x <= 0) { //player 2 scored
             score.player2++;
-            sound("GoalSound.mp3");
+            sound("GoalSound.wav");
             newPaddles();
             newBall();
         }
         
         if(ball.x >= GAME_WIDTH-BALL_DIAMETER) { //player 1 scored
             score.player1++;
-            sound("GoalSound.mp3");
+            sound("GoalSound.wav");
             newPaddles();
             newBall();
         }
@@ -192,26 +193,29 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public class ActionListener extends KeyAdapter { 
         public void keyPressed(KeyEvent e) {
-            paddle1.keyPressed(e);
-            paddle2.keyPressed(e);
+            rectPaddle1.keyPressedRect(e);
+            rectPaddle2.keyPressedRect(e);
         }
         
         public void keyReleased(KeyEvent e) {
-            paddle1.keyReleased(e);
-            paddle2.keyReleased(e);
+            rectPaddle1.keyReleasedRect(e);
+            rectPaddle2.keyReleasedRect(e);
         }
     }
-    
+
     public void sound (String soundName) {
+
         try{
-            AudioInputStream audio = AudioSystem.getAudioInputStream(Menu.class.getResource(soundName));
+            File file = new File(soundName);
+            AudioInputStream audio = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audio);
             clip.start();
+
         } catch (Exception e){
             System.out.println("check "+soundName+"\n");
             e.printStackTrace();
-        } 
+        }
     }
 
 
