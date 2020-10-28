@@ -1,40 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="tutorial">
-  <grid id="27dc6" binding="tutorialPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="tutorialPanel" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-16777216"/>
+      <maximumSize width="800" height="600"/>
+      <preferredSize width="800" height="600"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="7e223" class="javax.swing.JLabel" binding="titleLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Ravie" size="50"/>
           <foreground color="-14848739"/>
           <horizontalTextPosition value="11"/>
+          <labelFor value="bccba"/>
           <text value="Tutorial"/>
         </properties>
       </component>
       <component id="a4be0" class="javax.swing.JButton" binding="backButton">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-13948117"/>
+          <borderPainted value="true"/>
+          <font name="Forte" size="30"/>
+          <foreground color="-16731717"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <opaque value="true"/>
+          <selected value="false"/>
           <text value="Back to Menu"/>
         </properties>
       </component>
-      <scrollpane id="faf00">
+      <scrollpane id="bccba" binding="scrollPane">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
-        <children/>
+        <children>
+          <component id="26f29" class="javax.swing.JTextArea" binding="textArea">
+            <constraints/>
+            <properties>
+              <background color="-16777216"/>
+              <editable value="false"/>
+              <font name="Courier New" size="20" style="1"/>
+              <foreground color="-16731717"/>
+              <lineWrap value="true"/>
+              <margin top="10" left="10" bottom="10" right="10"/>
+              <maximumSize width="500" height="400"/>
+              <preferredSize width="500" height="400"/>
+              <text value="GeoPong is like a game of hockey, the difference being you can change what you use to hit the ball with!&#10;&#10;The goal of GeoPong is to get the ball past your opponent's paddle.&#10;&#10;Player 1 uses the 'W' key to move their paddle up and the 'S' key to move their paddle down.&#10;&#10;Player 2 uses the up and down arrow keys.&#10;&#10;To change to an ovular paddle Player 1 uses the 'E' key and Player 2 uses the 'RIGHT-SHIFT' key.&#10;&#10;Enjoy!"/>
+              <wrapStyleWord value="true"/>
+            </properties>
+          </component>
+        </children>
       </scrollpane>
+      <hspacer id="e272">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="4b82d">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="7531a">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="c8590">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
     </children>
   </grid>
 </form>

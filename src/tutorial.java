@@ -13,6 +13,8 @@ public class tutorial extends JFrame {
     private JPanel tutorialPanel;
     private JLabel titleLabel;
     private JButton backButton;
+    private JScrollPane scrollPane;
+    private JTextArea textArea;
 
     public tutorial(String title) {
         super(title);
